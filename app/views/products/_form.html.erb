@@ -1,0 +1,47 @@
+<%= form_for @product, :html => {:multipart => true} do |f| %>
+    <% if @product.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@product.errors.count, "error") %> prohibited this product from being saved:</h2>
+
+          <ul>
+            <% @product.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :title %>
+      <br/>
+      <%= f.text_field :title %>
+      <br/>
+      <%= f.label :price %>
+      <br/>
+      <%= f.text_field :price %>
+    </div>
+    <p>
+      <%#= f.file_field :image %>
+
+    </p>
+    <!--<div>
+      <%#= f.fields_for :addresses do |builder| %>
+          <p>
+            <%#= builder.text_field :email %>
+          </p>
+      <%# end %>
+    </div>-->
+    <div>
+     <%= f.fields_for :assets do |asset_fields| %>
+        <p>
+         <%= asset_fields.file_field :image %>
+        </p>
+     <% end %>
+    </div>
+
+
+
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+<% end %>
